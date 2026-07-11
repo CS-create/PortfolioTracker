@@ -45,7 +45,7 @@ public class PortfolioService : IPortfolioService
         }
 
         return new PortfolioDto(
-            portfolio.id,
+            portfolio.Id,
             portfolio.Name,
             holdingDtos.Sum(h => h.MarketValue),
             holdingDtos.Sum(h => h.UnrealizedGainLoss),

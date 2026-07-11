@@ -2,9 +2,9 @@
 
 namespace Application.Interfaces;
 
-public class IPriceSnapshotRepository
+public interface IPriceSnapshotRepository
 {
-    Task<PriceSnapshot?> GetLastestAsync(string symbol);
+    Task<PriceSnapshot?> GetLatestAsync(string symbol);
     Task AddAsync(PriceSnapshot priceSnapshot);
     Task SaveChangesAsync();
 }
