@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
       <UserSecretsId>6506a2e8-010d-4f6e-aa5f-348b12023bdc</UserSecretsId>
+      <RootNamespace>PortfolioTracker</RootNamespace>
   </PropertyGroup>
 
     <ItemGroup>
