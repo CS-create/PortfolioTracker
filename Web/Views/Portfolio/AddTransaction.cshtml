@@ -1,0 +1,46 @@
+﻿@model Web.Models.CreateTransactionForm
+
+<h2>Record Transaction</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="AddTransaction" method="post">
+    <input type="hidden" name="portfolioId" value="@ViewBag.PortfolioId" />
+
+    <div class="mb-3">
+        <label>Holding</label>
+        <select name="HoldingId" class="form-control">
+            @foreach (var holding in (List<Web.Models.HoldingViewData>)ViewBag.Holdings)
+            {
+                <option value="@holding.Id">@holding.Symbol</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Type</label>
+        <select name="Type" class="form-control">
+            <option value="0">Buy</option>
+            <option value="1">Sell</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Quantity</label>
+        <input name="Quantity" type="number" step="0.0001" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Price Per Unit</label>
+        <input name="PricePerUnit" type="number" step="0.01" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Date</label>
+        <input name="ExecutedAt" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Record Transaction</button>
+</form>
+
+<a asp-action="Details" asp-route-id="@ViewBag.PortfolioId">Back to portfolio</a>

@@ -120,4 +120,10 @@ public class PortfolioService : IPortfolioService
 
         return portfolio;
     }
+    
+    public async Task<List<PortfolioSummaryDto>> GetPortfoliosForUserAsync(Guid userId)
+    {
+        var portfolios = await _portfolioRepository.GetByUserIdAsync(userId);
+        return portfolios.Select(p => new PortfolioSummaryDto(p.Id, p.Name)).ToList();
+    }
 }

@@ -67,6 +67,7 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Portfolio");
     }
 
+    [HttpPost]
     public IActionResult Logout()
     {
         HttpContext.Session.Clear();

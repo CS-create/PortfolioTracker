@@ -8,4 +8,5 @@ public interface IPortfolioService
     Task<Guid> CreatePortfolioAsync(Guid userId, CreatePortfolioDto dto);
     Task<Guid> AddHoldingAsync(Guid portfolioId, Guid userId, CreateHoldingDto dto);
     Task AddTransactionAsync(Guid portfolioId, Guid userId, CreateTransactionDto dto);
+    Task<List<PortfolioSummaryDto>> GetPortfoliosForUserAsync(Guid userId);
 }

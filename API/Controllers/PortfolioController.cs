@@ -87,5 +87,12 @@ public class PortfolioController : ControllerBase
         }
     }
     
+    [HttpGet]
+    public async Task<ActionResult<List<PortfolioSummaryDto>>> GetMyPortfolios()
+    {
+        var portfolios = await _portfolioService.GetPortfoliosForUserAsync(CurrentUserId);
+        return Ok(portfolios);
+    }
+    
 
 }

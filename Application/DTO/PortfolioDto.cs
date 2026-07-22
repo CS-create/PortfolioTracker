@@ -7,3 +7,5 @@ public record PortfolioDto(
     decimal TotalGainLoss,
     List<HoldingDto> Holdings
 );
+
+public record PortfolioSummaryDto(Guid Id, string Name);

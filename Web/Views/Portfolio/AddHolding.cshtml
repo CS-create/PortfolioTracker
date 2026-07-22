@@ -1,0 +1,48 @@
+﻿@model List<Web.Models.StockSearchResultView>
+
+<h2>Add Holding</h2>
+
+<form asp-action="SearchStocks" method="get">
+    <input type="hidden" name="portfolioId" value="@ViewBag.PortfolioId" />
+    <div class="mb-3">
+        <label>Search for a company or ticker</label>
+        <input name="query" value="@ViewBag.Query" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Region</th>
+            <th>Currency</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var stock in Model)
+        {
+            <tr>
+                <td>@stock.Symbol</td>
+                <td>@stock.Name</td>
+                <td>@stock.Region</td>
+                <td>@stock.Currency</td>
+                <td>
+                    <form asp-action="ConfirmAddHolding" method="post">
+                        <input type="hidden" name="portfolioId" value="@ViewBag.PortfolioId" />
+                        <input type="hidden" name="symbol" value="@stock.Symbol" />
+                        <input type="hidden" name="currency" value="@stock.Currency" />
+                        <button type="submit" class="btn btn-sm btn-success">Add</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Details" asp-route-id="@ViewBag.PortfolioId">Back to portfolio</a>
