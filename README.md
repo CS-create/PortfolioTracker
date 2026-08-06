@@ -1,4 +1,6 @@
 # PortfolioTracker
+Fully released as of 06-08-2026
+
 
 A full-stack stock portfolio tracker built with C# and ASP.NET Core, using Clean Architecture principles. Users can register, create portfolios, search for real stocks, record buy/sell transactions, and see live-calculated market value and gain/loss based on real-time prices.
 
@@ -6,15 +8,15 @@ Built as a personal project to demonstrate backend architecture, authentication,
 
 ## Features
 
-- **JWT authentication** — register/login/logout, with every portfolio endpoint scoped to the authenticated user's own data
-- **Live stock search** — search by company name or ticker via the Alpha Vantage API
-- **Portfolio management** — create portfolios, add holdings, record buy/sell transactions
-- **Automatic financial calculations** — average cost basis, market value, and unrealized gain/loss computed from transaction history and live prices
-- **Price caching** — a background service periodically refreshes and caches prices to avoid excessive external API calls
-- **Web frontend** — session-based ASP.NET Core MVC app; the JWT is held server-side and never exposed to the browser
+- **JWT authentication** : register/login/logout, with every portfolio endpoint scoped to the authenticated user's own data
+- **Live stock search** : search by company name or ticker via the Alpha Vantage API
+- **Portfolio management** : create portfolios, add holdings, record buy/sell transactions
+- **Automatic financial calculations** : average cost basis, market value, and unrealized gain/loss computed from transaction history and live prices
+- **Price caching** : a background service periodically refreshes and caches prices to avoid excessive external API calls
+- **Web frontend** : session-based ASP.NET Core MVC app; the JWT is held server-side and never exposed to the browser
 - **24 automated unit tests** covering domain calculations, service logic, and authorization rules
-- **Dockerized** — the full stack (API, Web, PostgreSQL) runs with a single `docker-compose up`
-- **CI** — GitHub Actions builds and runs the full test suite on every push
+- **Dockerized** : the full stack (API, Web, PostgreSQL) runs with a single `docker-compose up`
+- **CI** : GitHub Actions builds and runs the full test suite on every push
 
 ## Architecture
 
@@ -25,11 +27,11 @@ API  →  Application  →  Domain
 Infrastructure  →  Application  (via interfaces)
 ```
 
-- **Domain** — core entities (`Portfolio`, `Holding`, `Transaction`, `User`, `PriceSnapshot`) and business logic (e.g. cost-basis calculation), with no external dependencies
-- **Application** — service interfaces, DTOs, and orchestration logic (e.g. `PortfolioService`, `AuthService`)
-- **Infrastructure** — EF Core + PostgreSQL implementation, JWT generation, and the Alpha Vantage API client
-- **API** — ASP.NET Core Web API exposing REST endpoints, documented with Swagger
-- **Web** — ASP.NET Core MVC frontend that calls the API server-to-server
+- **Domain** : core entities (`Portfolio`, `Holding`, `Transaction`, `User`, `PriceSnapshot`) and business logic (e.g. cost-basis calculation), with no external dependencies
+- **Application** : service interfaces, DTOs, and orchestration logic (e.g. `PortfolioService`, `AuthService`)
+- **Infrastructure** : EF Core + PostgreSQL implementation, JWT generation, and the Alpha Vantage API client
+- **API** : ASP.NET Core Web API exposing REST endpoints, documented with Swagger
+- **Web** : ASP.NET Core MVC frontend that calls the API server-to-server
 
 ```
 PortfolioTracker/
@@ -104,13 +106,13 @@ dotnet test
 
 24 tests covering:
 - Domain-level financial calculations (`Holding.GetTotalQuantity`, `Holding.GetAverageCostBasis`)
-- `PortfolioService` — CRUD operations and ownership/authorization checks
-- `AuthService` — registration, password hashing, login, and rejection of invalid credentials
+- `PortfolioService` : CRUD operations and ownership/authorization checks
+- `AuthService` : registration, password hashing, login, and rejection of invalid credentials
 
 ## Known limitations
 
 This is a portfolio/demo project, not a production system. A few deliberate simplifications:
-- No refresh tokens — JWTs expire after 60 minutes and require re-login
+- No refresh tokens : JWTs expire after 60 minutes and require re-login
 - Alpha Vantage's free tier has a low daily rate limit, which can affect live price fetching during heavy testing
 - Database migrations must be applied manually after the first `docker-compose up` (not automated into container startup)
 - No rate limiting or bot protection on the API
