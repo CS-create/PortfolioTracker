@@ -13,8 +13,8 @@ else
     <ul class="list-group">
         @foreach (var portfolio in Model)
         {
-            <li class="list-group-item">
-                <a asp-action="Details" asp-route-id="@portfolio.Id">@portfolio.Name</a>
+            <li class="list-group-item p-0">
+                <a asp-action="Details" asp-route-id="@portfolio.Id" class="d-block p-3 text-decoration-none">@portfolio.Name</a>
             </li>
         }
     </ul>

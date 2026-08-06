@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
       <UserSecretsId>6506a2e8-010d-4f6e-aa5f-348b12023bdc</UserSecretsId>
       <RootNamespace>PortfolioTracker</RootNamespace>
+      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
     <ItemGroup>
@@ -21,6 +22,12 @@
     <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
