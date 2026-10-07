@@ -52,14 +52,15 @@ public class CachedStockPriceProvider : IStockPriceProvider
         var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
 
-        using var stream = await response.Content.ReadAsStreamAsync();
-        using var doc = await JsonDocument.ParseAsync(stream);
+        var json = await response.Content.ReadAsStringAsync();
+        using var doc = JsonDocument.Parse(json);
 
-        var priceString = doc.RootElement
-            .GetProperty("Global Quote")
-            .GetProperty("05. price")
-            .GetString();
+        if (!doc.RootElement.TryGetProperty("Global Quote", out var quote)
+            || !quote.TryGetProperty("05. price", out var priceElement))
+        {
+            throw new InvalidOperationException($"No price for {symbol} from Alpha Vantage: {json}");
+        }
 
-        return decimal.Parse(priceString!, System.Globalization.CultureInfo.InvariantCulture);
+        return decimal.Parse(priceElement.GetString()!, System.Globalization.CultureInfo.InvariantCulture);
     }
 }
